@@ -62,6 +62,12 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
                 {
                     transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
                 }
+
+                else if(move == "Running") //Arreglar
+                {
+                    villagerSpeed = 4f;
+                    transform.position += transform.forward * villagerSpeed * Time.deltaTime;
+                }
             }
 
             public void PrintNames() // Esta función es la encargada de imprimir los mensajes con las variables de los Enums.
@@ -107,6 +113,11 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
                         zM = Move.Rotating;
                         move = "Rotating";
                         break;
+
+                    case 6:
+                        zM = Move.Running;
+                        move = "Running";
+                        break;
                 }
             }
 
@@ -140,7 +151,8 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
         {
             Idle,
             Moving,
-            Rotating
+            Rotating,
+            Running
         }
 
         public struct VillagersData // Este Struct almacena las variables.
