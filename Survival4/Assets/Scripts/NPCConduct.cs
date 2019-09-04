@@ -2,31 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCMovement : MonoBehaviour
+public class NPCConduct : MonoBehaviour
 {
     public void Update()
     {
-        float zombieSpeed = 1f; // Se creó una variable para la velocidad de los zombies.
+        float NPCSpeed = 2f; // Se creó una variable para la velocidad de los zombies.
         float rotationSpeed = 25f; // Se creó una variable mucho mayor que la velocidad general del zombie, para que su rotación pueda ser visible.
 
         if (move == "Forwards")
         {
-            transform.position += transform.forward * zombieSpeed * Time.deltaTime;
+            transform.position += transform.forward * NPCSpeed * Time.deltaTime;
         }
 
         else if (move == "Backwards")
         {
-            transform.position -= transform.forward * zombieSpeed * Time.deltaTime;
+            transform.position -= transform.forward * NPCSpeed * Time.deltaTime;
         }
 
         else if (move == "Right")
         {
-            transform.position += transform.right * zombieSpeed * Time.deltaTime;
+            transform.position += transform.right * NPCSpeed * Time.deltaTime;
         }
 
         else if (move == "Left")
         {
-            transform.position -= transform.right * zombieSpeed * Time.deltaTime;
+            transform.position -= transform.right * NPCSpeed * Time.deltaTime;
         }
 
         else if (move == "Idle")

@@ -7,8 +7,11 @@ using NPC.Enemy;
 using NPC.Ally;
 
 
+
 public class Manager : MonoBehaviour
 {
+    GameObject thePeople;
+
     public const int maxGen = 25; // Se creó una variable constante para el número máximo de generación.
     public readonly int minGen; // Se declaró un readonly para el mínimo posible de generación de objetos. 
 
@@ -30,7 +33,7 @@ public class Manager : MonoBehaviour
         for (int j = 0; j < rnd; j++) // Este For genera los objetos siguiendo los límites establecidos.
         {
             new minGenerator(minGen);
-            GameObject thePeople = GameObject.CreatePrimitive(PrimitiveType.Cube); // El GameObject "thePeople" genera los cubos para zombies, aldeanos y héroes.
+            thePeople = GameObject.CreatePrimitive(PrimitiveType.Cube); // El GameObject "thePeople" genera los cubos para zombies, aldeanos y héroes.
 
             // El Vector3 de posición es el que servirá para generar los cubos en una posición aleatoria.
             Vector3 posicion = new Vector3();
@@ -79,6 +82,7 @@ public class Manager : MonoBehaviour
             }
         }
     }
+    
 }
 
 // Quise hacer una clase diferente para utilizarla como constructor, en este se establece el readonly.

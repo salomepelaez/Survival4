@@ -4,14 +4,15 @@ using UnityEngine;
 
 // Se importó el Namespace para poder utilizar sus componentes.
 using NPC;
+using NPC.Enemy;
 
 namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and Enemy
 {
     namespace Ally // Este es el namespace anidado
     {
-        public class Villagers : NPCMovement
+        public class Villagers : NPCConduct
         {
-            VillagersData villagersData; // Se creó una variable del Struct.
+            public VillagersData villagersData; // Se creó una variable del Struct.
 
             void Start()
             {
@@ -60,9 +61,10 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
         }
 
         public struct VillagersData // Este Struct almacena las variables.
-        {            
+        {
             public int age;
             public Names peopleNames;
+                        
         }
     }
 }

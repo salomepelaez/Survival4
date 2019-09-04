@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 // Se importó el Namespace para poder utilizar sus componentes.
 using NPC;
+using NPC.Ally;
 
 namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and Enemy
 {
     namespace Enemy // Este es el namespace anidado
     {
-        public class Zombie : NPCMovement
+        public class Zombie : NPCConduct
         {
-            ZombieData zombieData; // Se creó una variable del Struct.
+            public GameObject go;
+            public ZombieData zombieData; // Se creó una variable del Struct.
 
             public void Start()
             {
@@ -64,12 +66,33 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
                     gameObject.GetComponent<Renderer>().material.color = Color.green;
                 }
             }
+
+            public void OnCollisionEnter(Collision collision)
+            {
+                if (collision.transform.tag == "Villager")
+                {
+                    Zombie zombie = go.AddComponent<Zombie>(); // Sale null xd
+                    zombie.zombieData = (ZombieData)go.GetComponent<Villagers>().villagersData;
+
+                    Destroy(go.GetComponent<Villagers>());
+                }
+            }
         }
 
         public struct ZombieData // Este Struct almacena todos los datos
         {           
             public MyTaste taste;
-            public ZombieColor mC;           
+            public ZombieColor mC;
+            public int age;
+            public Names peopleNames;
+
+            public static explicit operator ZombieData(VillagersData vD)
+            {
+                ZombieData zD = new ZombieData();
+                zD.age = vD.age;
+
+                return zD;
+            }
         }
 
         public enum MyTaste // Enum de los gustos
