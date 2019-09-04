@@ -10,6 +10,7 @@ public class Hero : MonoBehaviour
     HeroData hs; // Se creó una variable del Struct.
     GameObject pov; // Se creó un GameObject al que se le asignarán los componentes de la cámara. (pov: point of view)
     public readonly float sHero = Manager.sHero; // La variable se asignó como readonly, obteniéndola desde la clase Manager.
+    
 
     void Start()
     {

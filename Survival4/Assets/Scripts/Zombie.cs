@@ -8,7 +8,7 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
 {
     namespace Enemy // Este es el namespace anidado
     {
-        public class Zombie : MonoBehaviour
+        public class Zombie : NPCMovement
         {
             ZombieData zombieData; // Se creó una variable del Struct.
 
@@ -16,88 +16,13 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
             {
                 zombieData.taste = (MyTaste)Random.Range(0, 5); // Al igual que en la clase "Villagers", la variable Random se utilizó en el Start para asignarla una vez por objeto.  
                 Coloring(); // Se llamó a la función que asigna los colores.
-                InvokeRepeating("ZombieMove", 3.0f, 3.0f); // Se utilizó una función de repetición para el movimiento de los zombies.
+                InvokeRepeating("NPCMove", 3.0f, 3.0f);
                 transform.tag = "Zombie"; // Se cambió el nombre de la etiqueta.
                 transform.name = "Zombie"; // Se cambió el nombre del objeto para poder identificarlo fácilmente.
             }
 
             // En el Update se asignaron las posibilidades de movimiento, basándose en una función creada unas líneas más abajo.
-            public void Update()
-            {
-                float zombieSpeed = 1f; // Se creó una variable para la velocidad de los zombies.
-                float rotationSpeed = 25f; // Se creó una variable mucho mayor que la velocidad general del zombie, para que su rotación pueda ser visible.
-
-                if (move == "Forwards")
-                {
-                    transform.position += transform.forward * zombieSpeed * Time.deltaTime;
-                }
-
-                else if (move == "Backwards")
-                {
-                    transform.position -= transform.forward * zombieSpeed * Time.deltaTime;
-                }
-
-                else if (move == "Right")
-                {
-                    transform.position += transform.right * zombieSpeed * Time.deltaTime;
-                }
-
-                else if (move == "Left")
-                {
-                    transform.position -= transform.right * zombieSpeed * Time.deltaTime;
-                }
-
-                else if (move == "Idle")
-                {
-                    // ...
-                }
-
-                else if (move == "Rotating")
-                {
-                    transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
-                }
-            }
-
-            public Move zM;
-            string move;
-
-            // Esta es la función de movimiento antes mencionada.
-            void ZombieMove() // Se encarga de asignar variables aleatorias, creando las posibilidades de dirección.
-            {
-                switch (Random.Range(0, 6))
-                {
-                    case 0:
-
-                        zM = Move.Moving;
-                        move = "Forwards";
-                        break;
-
-                    case 1:
-                        zM = Move.Moving;
-                        move = "Backwards";
-                        break;
-
-                    case 2:
-                        zM = Move.Moving;
-                        move = "Right";
-                        break;
-
-                    case 3:
-                        zM = Move.Moving;
-                        move = "Left";
-                        break;
-
-                    case 4:
-                        zM = Move.Idle;
-                        move = "Idle";
-                        break;
-
-                    case 5:
-                        zM = Move.Rotating;
-                        move = "Rotating";
-                        break;
-                }
-            }
+            
 
             public void PrintMessages() // Esta función se encarga de generar los mensajes, utilizando los miembros del Enum.
             {
@@ -142,11 +67,9 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
         }
 
         public struct ZombieData // Este Struct almacena todos los datos
-        {
-            public Move zM;
+        {           
             public MyTaste taste;
-            public ZombieColor mC;
-            public string move;
+            public ZombieColor mC;           
         }
 
         public enum MyTaste // Enum de los gustos
@@ -157,13 +80,7 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
             Orejas,
             Bocas
         }
-
-        public enum Move // Enum del movimiento
-        {
-            Idle,
-            Moving,
-            Rotating
-        }
+              
 
         public enum ZombieColor // Enum de los colores
         {

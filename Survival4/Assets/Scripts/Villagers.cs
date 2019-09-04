@@ -9,7 +9,7 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
 {
     namespace Ally // Este es el namespace anidado
     {
-        public class Villagers : MonoBehaviour
+        public class Villagers : NPCMovement
         {
             VillagersData villagersData; // Se creó una variable del Struct.
 
@@ -25,102 +25,14 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
 
                 villagersData.age = Random.Range(15, 101);
                 villagersData.peopleNames = (Names)Random.Range(0, 20);
-                InvokeRepeating("VillagerMove", 3.0f, 3.0f);
+
+                InvokeRepeating("NPCMove", 3.0f, 3.0f);
             }
-
-            public void Update()
-            {
-                float villagerSpeed = 1f; // Se creó una variable para la velocidad de los zombies.
-                float rotationSpeed = 25f; // Se creó una variable mucho mayor que la velocidad general del zombie, para que su rotación pueda ser visible.
-
-                if (move == "Forwards")
-                {
-                    transform.position += transform.forward * villagerSpeed * Time.deltaTime;
-                }
-
-                else if (move == "Backwards")
-                {
-                    transform.position -= transform.forward * villagerSpeed * Time.deltaTime;
-                }
-
-                else if (move == "Right")
-                {
-                    transform.position += transform.right * villagerSpeed * Time.deltaTime;
-                }
-
-                else if (move == "Left")
-                {
-                    transform.position -= transform.right * villagerSpeed * Time.deltaTime;
-                }
-
-                else if (move == "Idle")
-                {
-                    // ...
-                }
-
-                else if (move == "Rotating")
-                {
-                    transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
-                }
-
-                else if(move == "Running") //Arreglar
-                {
-                    villagerSpeed = 4f;
-                    transform.position += transform.forward * villagerSpeed * Time.deltaTime;
-                }
-            }
-
+            
             public void PrintNames() // Esta función es la encargada de imprimir los mensajes con las variables de los Enums.
             {
-                Debug.Log("Hola soy " + villagersData.peopleNames + ". Y tengo " + villagersData.age + " años.");
+               Debug.Log("Hola soy " + villagersData.peopleNames + ". Y tengo " + villagersData.age + " años.");
             }
-
-            public Move zM;
-            string move;
-
-            // Esta es la función de movimiento antes mencionada.
-            void VillagerMove() // Se encarga de asignar variables aleatorias, creando las posibilidades de dirección.
-            {
-                switch (Random.Range(0, 6))
-                {
-                    case 0:
-
-                        zM = Move.Moving;
-                        move = "Forwards";
-                        break;
-
-                    case 1:
-                        zM = Move.Moving;
-                        move = "Backwards";
-                        break;
-
-                    case 2:
-                        zM = Move.Moving;
-                        move = "Right";
-                        break;
-
-                    case 3:
-                        zM = Move.Moving;
-                        move = "Left";
-                        break;
-
-                    case 4:
-                        zM = Move.Idle;
-                        move = "Idle";
-                        break;
-
-                    case 5:
-                        zM = Move.Rotating;
-                        move = "Rotating";
-                        break;
-
-                    case 6:
-                        zM = Move.Running;
-                        move = "Running";
-                        break;
-                }
-            }
-
         }
 
         public enum Names // Este Enum abriga los nombres.
@@ -147,20 +59,10 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
             David
         }
 
-        public enum Move // Enum del movimiento
-        {
-            Idle,
-            Moving,
-            Rotating,
-            Running
-        }
-
         public struct VillagersData // Este Struct almacena las variables.
-        {
-            public Move zM;
+        {            
             public int age;
             public Names peopleNames;
-            public string move;
         }
     }
 }
