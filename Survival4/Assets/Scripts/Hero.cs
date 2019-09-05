@@ -4,13 +4,14 @@ using UnityEngine;
 // Se importaron los Namespace para poder utilizar sus componentes.
 using NPC.Enemy;
 using NPC.Ally;
+using UnityEngine.UI;
 
 public class Hero : MonoBehaviour
 {
     HeroData hs; // Se creó una variable del Struct.
     GameObject pov; // Se creó un GameObject al que se le asignarán los componentes de la cámara. (pov: point of view)
     public readonly float sHero = Manager.sHero; // La variable se asignó como readonly, obteniéndola desde la clase Manager.
-    
+    public Text Message;
 
     void Start()
     {
@@ -44,7 +45,7 @@ public class Hero : MonoBehaviour
     {
         if (collision.transform.tag == "Villager")
         {
-            collision.transform.GetComponent<Villagers>().PrintNames();
+            Message.text = collision.transform.GetComponent<Villagers>().PrintNames();
         }
 
         if (collision.transform.tag == "Zombie")

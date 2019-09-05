@@ -6,8 +6,6 @@ using UnityEngine.UI;
 using NPC.Enemy;
 using NPC.Ally;
 
-
-
 public class Manager : MonoBehaviour
 {
     GameObject thePeople;
@@ -40,6 +38,7 @@ public class Manager : MonoBehaviour
             posicion.x = Random.Range(-30, 30);
             posicion.z = Random.Range(-30, 30);
             thePeople.transform.position = posicion; // A los cubos se les asigna la posición aleatoria antes mencionada.
+            
             thePeople.AddComponent<Rigidbody>(); // Se les agrega Rigidbody.
             thePeople.GetComponent<Rigidbody>().freezeRotation = true;
             int change = Random.Range(0, 2); // Se creó un Random con dos únicas opciones.
@@ -80,9 +79,9 @@ public class Manager : MonoBehaviour
                 v = v + 1;
                 VillagersNum.text = "Villagers: " + v;
             }
+
         }
     }
-    
 }
 
 // Quise hacer una clase diferente para utilizarla como constructor, en este se establece el readonly.

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 // Se importó el Namespace para poder utilizar sus componentes.
 using NPC;
 using NPC.Enemy;
@@ -13,6 +13,7 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
         public class Villagers : NPCConduct
         {
             public VillagersData villagersData; // Se creó una variable del Struct.
+            public Text Message;
 
             void Start()
             {
@@ -28,12 +29,10 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
                 villagersData.peopleNames = (Names)Random.Range(0, 20);
 
                 InvokeRepeating("NPCMove", 3.0f, 3.0f);
+
+                Message.text = "Hola soy " + villagersData.peopleNames + ". Y tengo " + villagersData.age + " años.";
             }
-            
-            public void PrintNames() // Esta función es la encargada de imprimir los mensajes con las variables de los Enums.
-            {
-               Debug.Log("Hola soy " + villagersData.peopleNames + ". Y tengo " + villagersData.age + " años.");
-            }
+
         }
 
         public enum Names // Este Enum abriga los nombres.
@@ -64,7 +63,15 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
         {
             public int age;
             public Names peopleNames;
-                        
+
+
+            /*public static explicit operator ZombieData(VillagersData vD)
+            {
+                ZombieData zD = new ZombieData();
+                zD.peopleNames = vD.peopleNames;
+
+                return zD;
+            }*/
         }
     }
 }

@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class NPCConduct : MonoBehaviour
 {
+    Vector3 direction;
+    public float attackRange = 5f;
+    public GameObject player;
+
+    void Start()
+    {
+        player.AddComponent<Hero>();
+    }
+
     public void Update()
     {
         float NPCSpeed = 2f; // Se creó una variable para la velocidad de los zombies.
@@ -38,6 +47,16 @@ public class NPCConduct : MonoBehaviour
         {
             transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
         }
+
+        /*Vector3 myVector = player.transform.position;
+        float distance = myVector.magnitude;
+        
+        if(distance < attackRange)
+        {
+            direction = Vector3.Normalize(player.transform.position - transform.position);
+            transform.position += direction * NPCSpeed;
+        }*/
+
     }
 
     public Move m;
@@ -49,7 +68,6 @@ public class NPCConduct : MonoBehaviour
         switch (Random.Range(0, 6))
         {
             case 0:
-
                 m = Move.Moving;
                 move = "Forwards";
                 break;
@@ -78,6 +96,11 @@ public class NPCConduct : MonoBehaviour
                 m = Move.Rotating;
                 move = "Rotating";
                 break;
+
+            case 6:
+                m = Move.Pursuing;
+                move = "Pursuing";
+                break;
         }
     }
 
@@ -85,7 +108,8 @@ public class NPCConduct : MonoBehaviour
     {
         Idle,
         Moving,
-        Rotating
+        Rotating,
+        Pursuing
     }
 
     public struct NPCData

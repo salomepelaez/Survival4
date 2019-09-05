@@ -11,7 +11,6 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
     {
         public class Zombie : NPCConduct
         {
-            public GameObject go;
             public ZombieData zombieData; // Se creó una variable del Struct.
 
             public void Start()
@@ -21,10 +20,8 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
                 InvokeRepeating("NPCMove", 3.0f, 3.0f);
                 transform.tag = "Zombie"; // Se cambió el nombre de la etiqueta.
                 transform.name = "Zombie"; // Se cambió el nombre del objeto para poder identificarlo fácilmente.
-            }
 
-            // En el Update se asignaron las posibilidades de movimiento, basándose en una función creada unas líneas más abajo.
-            
+            }
 
             public void PrintMessages() // Esta función se encarga de generar los mensajes, utilizando los miembros del Enum.
             {
@@ -67,16 +64,6 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
                 }
             }
 
-            public void OnCollisionEnter(Collision collision)
-            {
-                if (collision.transform.tag == "Villager")
-                {
-                    Zombie zombie = go.AddComponent<Zombie>(); // Sale null xd
-                    zombie.zombieData = (ZombieData)go.GetComponent<Villagers>().villagersData;
-
-                    Destroy(go.GetComponent<Villagers>());
-                }
-            }
         }
 
         public struct ZombieData // Este Struct almacena todos los datos
@@ -85,14 +72,7 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
             public ZombieColor mC;
             public int age;
             public Names peopleNames;
-
-            public static explicit operator ZombieData(VillagersData vD)
-            {
-                ZombieData zD = new ZombieData();
-                zD.age = vD.age;
-
-                return zD;
-            }
+                        
         }
 
         public enum MyTaste // Enum de los gustos
