@@ -13,7 +13,8 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
         public class Villagers : NPCConduct
         {
             public VillagersData villagersData; // Se creó una variable del Struct.
-            public Text Message;
+            public  string message;
+            public static string vNames;
 
             void Start()
             {
@@ -30,9 +31,14 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
 
                 InvokeRepeating("NPCMove", 3.0f, 3.0f);
 
-                Message.text = "Hola soy " + villagersData.peopleNames + ". Y tengo " + villagersData.age + " años.";
+                vNames = PrintNames();
             }
 
+            public string PrintNames()
+            {
+                message = "Hola soy " + villagersData.peopleNames + ". Y tengo " + villagersData.age + " años.";
+                return message;
+            }
         }
 
         public enum Names // Este Enum abriga los nombres.

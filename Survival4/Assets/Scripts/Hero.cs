@@ -27,6 +27,7 @@ public class Hero : MonoBehaviour
         pov.AddComponent<HeroAim>();
         gameObject.AddComponent<HeroMove>();
         gameObject.GetComponent<HeroMove>().speed = sHero; // Se utilizaron los miembros del Enum "Speed", y se reasigna la velocidad.
+        Message = GameObject.Find("VMessage").GetComponent<Text>();
 
         pov.transform.SetParent(this.transform);
         pov.transform.localPosition = Vector3.zero;
@@ -45,12 +46,12 @@ public class Hero : MonoBehaviour
     {
         if (collision.transform.tag == "Villager")
         {
-            Message.text = ;
+            Message.text = Villagers.vNames;
         }
 
         if (collision.transform.tag == "Zombie")
         {
-            collision.transform.GetComponent<Zombie>().PrintMessages();
+            Message.text = Zombie.zMessage;
         }
     }
 

@@ -12,6 +12,8 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
         public class Zombie : NPCConduct
         {
             public ZombieData zombieData; // Se creó una variable del Struct.
+            public string message;
+            public static string zMessage;
 
             public void Start()
             {
@@ -20,12 +22,13 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
                 InvokeRepeating("NPCMove", 3.0f, 3.0f);
                 transform.tag = "Zombie"; // Se cambió el nombre de la etiqueta.
                 transform.name = "Zombie"; // Se cambió el nombre del objeto para poder identificarlo fácilmente.
-
+                zMessage = PrintMessages();
             }
 
-            public void PrintMessages() // Esta función se encarga de generar los mensajes, utilizando los miembros del Enum.
+            public string PrintMessages() // Esta función se encarga de generar los mensajes, utilizando los miembros del Enum.
             {
-                Debug.Log("Waaaarr quiero comer " + (zombieData.taste));
+                message = "Waaaarr quiero comer " + (zombieData.taste);
+                return message;
             }
 
             public ZombieColor mC;
