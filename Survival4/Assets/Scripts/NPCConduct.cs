@@ -9,33 +9,21 @@ public class NPCConduct : MonoBehaviour
     public GameObject player;
 
     void Start()
-    {
-        player.AddComponent<Hero>();
+    {        
+        player.AddComponent<Hero>();               
     }
 
     public void Update()
     {
+        //player = new GameObject();
         float NPCSpeed = 2f; // Se creó una variable para la velocidad de los zombies.
         float rotationSpeed = 25f; // Se creó una variable mucho mayor que la velocidad general del zombie, para que su rotación pueda ser visible.
 
         if (move == "Forwards")
         {
+            float rotat = transform.eulerAngles.y;
+            transform.rotation = Quaternion.Euler(0.0f, rotat, 0.0f);
             transform.position += transform.forward * NPCSpeed * Time.deltaTime;
-        }
-
-        else if (move == "Backwards")
-        {
-            transform.position -= transform.forward * NPCSpeed * Time.deltaTime;
-        }
-
-        else if (move == "Right")
-        {
-            transform.position += transform.right * NPCSpeed * Time.deltaTime;
-        }
-
-        else if (move == "Left")
-        {
-            transform.position -= transform.right * NPCSpeed * Time.deltaTime;
         }
 
         else if (move == "Idle")
@@ -48,15 +36,19 @@ public class NPCConduct : MonoBehaviour
             transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
         }
 
-        /*Vector3 myVector = player.transform.position;
+       /* Vector3 myVector = player.transform.position;
         float distance = myVector.magnitude;
         
         if(distance < attackRange)
         {
-            direction = Vector3.Normalize(player.transform.position - transform.position);
-            transform.position += direction * NPCSpeed;
-        }*/
+            m = Move.Pursuing;
+        }
 
+        if(m == Move.Pursuing)
+        {
+            direction = Vector3.Normalize(player.transform.position - transform.position);
+            transform.position += direction * NPCSpeed * Time.deltaTime;
+        }*/
     }
 
     public Move m;
@@ -71,33 +63,18 @@ public class NPCConduct : MonoBehaviour
                 m = Move.Moving;
                 move = "Forwards";
                 break;
-
+                           
             case 1:
-                m = Move.Moving;
-                move = "Backwards";
-                break;
-
-            case 2:
-                m = Move.Moving;
-                move = "Right";
-                break;
-
-            case 3:
-                m = Move.Moving;
-                move = "Left";
-                break;
-
-            case 4:
                 m = Move.Idle;
                 move = "Idle";
                 break;
 
-            case 5:
+            case 2:
                 m = Move.Rotating;
                 move = "Rotating";
                 break;
 
-            case 6:
+            case 3:
                 m = Move.Pursuing;
                 move = "Pursuing";
                 break;
