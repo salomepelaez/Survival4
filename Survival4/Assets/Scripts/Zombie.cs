@@ -31,7 +31,7 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
 
             public string PrintMessages() // Esta función se encarga de generar los mensajes, utilizando los miembros del Enum.
             {
-                message = "Waaaarr, soy un Zombie, quiero comer " + zombieData.taste + ", y tengo " + zombieData.age + " años.";
+                message = "Waaaarr, soy un Zombie, quiero comer " + zombieData.taste; // + ", y tengo " + zombieData.age + " años.";
                 return message;
             }
 

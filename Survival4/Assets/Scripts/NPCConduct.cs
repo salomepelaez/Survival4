@@ -1,19 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NPC.Enemy;
 
 public class NPCConduct : MonoBehaviour
 {
     Vector3 direction;
-    public float attackRange = 5f;
-    //GameObject player;
+    public float attackRange = 0;
     public Transform target;
-
- 
 
     public void Update()
     {
-        float NPCSpeed = 2f; // Se creó una variable para la velocidad de los zombies.
+        float NPCSpeed = 0.5f; // Se creó una variable para la velocidad de los zombies.
         float rotationSpeed = 25f; // Se creó una variable mucho mayor que la velocidad general del zombie, para que su rotación pueda ser visible.
 
         if (move == "Moving")
@@ -33,16 +31,20 @@ public class NPCConduct : MonoBehaviour
             transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
         }
 
-         if(attackRange <= 5f )
-         {
-             m = Move.Pursuing;
-         }
+        foreach (Zombie zombie in Transform.FindObjectsOfType<Zombie>())
+        {
+            if (attackRange <= 0.5f)
+            {
+                m = Move.Pursuing;
+            }
 
-         if(m == Move.Pursuing)
-         {
-             direction = Vector3.Normalize(target.transform.position - transform.position);
-             transform.position += direction * NPCSpeed * Time.deltaTime;
-         }
+            if (m == Move.Pursuing)
+            {
+                direction = Vector3.Normalize(target.transform.position - transform.position);
+                transform.position += direction * NPCSpeed * Time.deltaTime;
+            }
+        }
+        
     }
 
     public Move m;
@@ -66,11 +68,6 @@ public class NPCConduct : MonoBehaviour
             case 2:
                 m = Move.Rotating;
                 move = "Rotating";
-                break;
-
-            case 3:
-                m = Move.Pursuing;
-                move = "Pursuing";
                 break;
         }
     }

@@ -13,12 +13,12 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
         public class Villagers : NPCConduct
         {
             public VillagersData villagersData; // Se creó una variable del Struct.
-            public  string message;
+            public string message;
             public static string vNames;
 
             void Start()
             {
-                target = FindObjectOfType<Hero>().GetComponent<Transform>();
+                target = FindObjectOfType<Zombie>().GetComponent<Transform>();
 
                 transform.tag = "Villager"; // El cambiar el nombre de la etiqueta, permite encontrar de manera sencilla el objeto con el que se colisiona.
                 transform.name = "Villager"; // Se cambió el nombre del objeto para poder identificarlo fácilmente.
@@ -36,9 +36,11 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
                 vNames = PrintNames();
             }
 
+            
             public string PrintNames()
             {
                 message = "Hola soy " + villagersData.peopleNames + ". Y tengo " + villagersData.age + " años.";
+            
                 return message;
             }
 
