@@ -36,7 +36,7 @@ public class Hero : MonoBehaviour
         float rotat = transform.eulerAngles.y;
         transform.rotation = Quaternion.Euler(0.0f, rotat, 0.0f);
 
-        if(attackRange < 0.5f)
+        if(attackRange < 0.05f)
         {
             StartCoroutine("PrintZMessages");
         }
@@ -47,7 +47,7 @@ public class Hero : MonoBehaviour
     {
         Message.text = Villagers.vNames;
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1);
         //Destroy(Message);
     }
 
@@ -55,7 +55,7 @@ public class Hero : MonoBehaviour
     {
         Message.text = Zombie.zMessage;
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1);
         //Destroy(Message);
     }
 

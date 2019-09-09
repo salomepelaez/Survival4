@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using NPC.Enemy;
+using NPC.Ally;
 
 public class NPCConduct : MonoBehaviour
 {
@@ -11,14 +12,15 @@ public class NPCConduct : MonoBehaviour
 
     public void Update()
     {
-        float NPCSpeed = 0.5f; // Se creó una variable para la velocidad de los zombies.
+        float npcSpeed = 0.5f; // Se creó una variable para la velocidad de los zombies.
         float rotationSpeed = 25f; // Se creó una variable mucho mayor que la velocidad general del zombie, para que su rotación pueda ser visible.
+        float runningSpeed = 0.1f;
 
         if (move == "Moving")
         {
             float rotat = transform.eulerAngles.y;
             transform.rotation = Quaternion.Euler(0.0f, rotat, 0.0f);
-            transform.position += transform.forward * NPCSpeed * Time.deltaTime;
+            transform.position += transform.forward * npcSpeed * Time.deltaTime;
         }
 
         else if (move == "Idle")
@@ -33,7 +35,7 @@ public class NPCConduct : MonoBehaviour
 
         foreach (Zombie zombie in Transform.FindObjectsOfType<Zombie>())
         {
-            if (attackRange <= 0.5f)
+            if (attackRange < 0.05f)
             {
                 m = Move.Pursuing;
             }
@@ -41,10 +43,24 @@ public class NPCConduct : MonoBehaviour
             if (m == Move.Pursuing)
             {
                 direction = Vector3.Normalize(target.transform.position - transform.position);
-                transform.position += direction * NPCSpeed * Time.deltaTime;
+                transform.position += direction * npcSpeed * Time.deltaTime;
             }
         }
-        
+
+        foreach (Villagers villagers in Transform.FindObjectsOfType<Villagers>())
+        {
+            if (attackRange < 0.05f)
+            {
+                m = Move.Running;
+            }
+
+            if (m == Move.Running)
+            {
+                direction = Vector3.Normalize(target.transform.position - transform.position);
+                transform.position -= direction * runningSpeed * Time.deltaTime;
+            }
+        }
+
     }
 
     public Move m;
@@ -74,6 +90,7 @@ public class NPCConduct : MonoBehaviour
 
     public enum Move // Enum del movimiento
     {
+        Running,
         Idle,
         Moving,
         Rotating,
