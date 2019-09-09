@@ -17,17 +17,21 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
 
             public void Start()
             {
+                target = FindObjectOfType<Hero>().GetComponent<Transform>();
+
                 zombieData.taste = (MyTaste)Random.Range(0, 5); // Al igual que en la clase "Villagers", la variable Random se utilizó en el Start para asignarla una vez por objeto.  
                 Coloring(); // Se llamó a la función que asigna los colores.
                 InvokeRepeating("NPCMove", 3.0f, 3.0f);
                 transform.tag = "Zombie"; // Se cambió el nombre de la etiqueta.
                 transform.name = "Zombie"; // Se cambió el nombre del objeto para poder identificarlo fácilmente.
                 zMessage = PrintMessages();
+
+                zombieData.age = Random.Range(15, 101);
             }
 
             public string PrintMessages() // Esta función se encarga de generar los mensajes, utilizando los miembros del Enum.
             {
-                message = "Waaaarr quiero comer " + (zombieData.taste);
+                message = "Waaaarr, soy un Zombie, quiero comer " + zombieData.taste + ", y tengo " + zombieData.age + " años.";
                 return message;
             }
 
@@ -74,8 +78,6 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
             public MyTaste taste;
             public ZombieColor mC;
             public int age;
-            public Names peopleNames;
-                        
         }
 
         public enum MyTaste // Enum de los gustos

@@ -12,14 +12,11 @@ public class Hero : MonoBehaviour
     GameObject pov; // Se creó un GameObject al que se le asignarán los componentes de la cámara. (pov: point of view)
     public readonly float sHero = Manager.sHero; // La variable se asignó como readonly, obteniéndola desde la clase Manager.
     public Text Message;
+    float attackRange = 5.0f;
 
     void Start()
     {
-        transform.name = "Hero"; // Se transformó su nombre para identificarlo más rápidamente.
-        // Vector3 que almacena la posición, las otras dos variables la asignan de manera aleatoria en los ejes X y Z.
-        Vector3 posicion = new Vector3();
-        posicion.x = Random.Range(-30, 30);
-        posicion.z = Random.Range(-30, 30);
+        transform.name = "Hero script"; // Se transformó su nombre para identificarlo más rápidamente.
 
         // Al GameObject se le asignaron los componentes de cámara, rotación y movimiento.
         GameObject pov = new GameObject();
@@ -39,6 +36,11 @@ public class Hero : MonoBehaviour
         float rotat = transform.eulerAngles.y;
         transform.rotation = Quaternion.Euler(0.0f, rotat, 0.0f);
 
+        if(attackRange <= 5.0f)
+        {
+            Message.text = Zombie.zMessage;
+        }
+
     }
 
     // La siguiente función es la encargada de imprimir los mensajes cuando hay colisión, utilizando las etiquetas.
@@ -51,7 +53,7 @@ public class Hero : MonoBehaviour
 
         if (collision.transform.tag == "Zombie")
         {
-            Message.text = Zombie.zMessage;
+            //Message.text = Zombie.zMessage;
         }
     }
 

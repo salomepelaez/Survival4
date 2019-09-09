@@ -10,6 +10,8 @@ public class Manager : MonoBehaviour
 {
     GameObject thePeople;
 
+    System.Random random = new System.Random();
+
     public const int maxGen = 25; // Se creó una variable constante para el número máximo de generación.
     public readonly int minGen; // Se declaró un readonly para el mínimo posible de generación de objetos. 
 
@@ -18,19 +20,26 @@ public class Manager : MonoBehaviour
     public Text VillagersNum;
 
     public static float sHero; // En esta línea se declara la velocidad estática del héroe, que luego se utiliza en la clase Hero.
+    public static float firstAge;
+    public static float secondAge;
+    public static float thirdAge;
 
-    public void Awake() // A continuación se asigna la velocidad mencionada del héroe.
+    public Manager()
     {
-        sHero = Random.Range(0.1f, 0.2f);
+        minGen = random.Next(5, 15);
     }
 
-    void Start()
+    void Awake()
     {
+        sHero = Random.Range(0.1f, 0.2f);
+        firstAge = Random.Range(0.1f, 0.2f);
+        secondAge = Random.Range(0.07f, 0.1f);
+        thirdAge = Random.Range(0.03f, 0.05f);
+
         int rnd = Random.Range(minGen, maxGen); // La generación es producida entre el mínimo de objetos y el máximo.
 
         for (int j = 0; j < rnd; j++) // Este For genera los objetos siguiendo los límites establecidos.
         {
-            new minGenerator(minGen);
             thePeople = GameObject.CreatePrimitive(PrimitiveType.Cube); // El GameObject "thePeople" genera los cubos para zombies, aldeanos y héroes.
 
             // El Vector3 de posición es el que servirá para generar los cubos en una posición aleatoria.
@@ -46,8 +55,9 @@ public class Manager : MonoBehaviour
             // El siguiente bloque de código se encarga de generar el héroe, está separado pues a diferencia de los miembros de la aldea, solo debe ser creado una vez.
             if (j == 0)
             {
+                print("se crea hero");
                 thePeople.AddComponent<Hero>(); // Se le agregan los componentes de la clase Hero.
-                thePeople.AddComponent<HeroAim>(); // Igualmente se le agregan los componentes de HeroAim.
+                //thePeople.AddComponent<HeroAim>(); // Igualmente se le agregan los componentes de HeroAim.
                 thePeople.GetComponent<Renderer>().material.color = Color.black; // Se le asignó color negro para diferenciarlos de otros objetos.
             }
 
@@ -84,13 +94,3 @@ public class Manager : MonoBehaviour
     }
 }
 
-// Quise hacer una clase diferente para utilizarla como constructor, en este se establece el readonly.
-public class minGenerator
-{
-    int minGen = Random.Range(5, 15);
-    public minGenerator(int g)
-    {
-        this.minGen = g;
-        minGen = Random.Range(5, 15);
-    }
-}

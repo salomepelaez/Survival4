@@ -6,20 +6,17 @@ public class NPCConduct : MonoBehaviour
 {
     Vector3 direction;
     public float attackRange = 5f;
-    public GameObject player;
+    //GameObject player;
+    public Transform target;
 
-    void Start()
-    {        
-        player.AddComponent<Hero>();               
-    }
+ 
 
     public void Update()
     {
-        //player = new GameObject();
         float NPCSpeed = 2f; // Se creó una variable para la velocidad de los zombies.
         float rotationSpeed = 25f; // Se creó una variable mucho mayor que la velocidad general del zombie, para que su rotación pueda ser visible.
 
-        if (move == "Forwards")
+        if (move == "Moving")
         {
             float rotat = transform.eulerAngles.y;
             transform.rotation = Quaternion.Euler(0.0f, rotat, 0.0f);
@@ -36,19 +33,16 @@ public class NPCConduct : MonoBehaviour
             transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
         }
 
-       /* Vector3 myVector = player.transform.position;
-        float distance = myVector.magnitude;
-        
-        if(distance < attackRange)
-        {
-            m = Move.Pursuing;
-        }
+         if(attackRange <= 5f )
+         {
+             m = Move.Pursuing;
+         }
 
-        if(m == Move.Pursuing)
-        {
-            direction = Vector3.Normalize(player.transform.position - transform.position);
-            transform.position += direction * NPCSpeed * Time.deltaTime;
-        }*/
+         if(m == Move.Pursuing)
+         {
+             direction = Vector3.Normalize(target.transform.position - transform.position);
+             transform.position += direction * NPCSpeed * Time.deltaTime;
+         }
     }
 
     public Move m;
@@ -61,7 +55,7 @@ public class NPCConduct : MonoBehaviour
         {
             case 0:
                 m = Move.Moving;
-                move = "Forwards";
+                move = "Moving";
                 break;
                            
             case 1:
