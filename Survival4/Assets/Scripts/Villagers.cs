@@ -39,6 +39,16 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
                 message = "Hola soy " + villagersData.peopleNames + ". Y tengo " + villagersData.age + " años.";
                 return message;
             }
+
+
+            public void OnCollisionEnter(Collision collision)
+            {
+                if (collision.transform.tag == "Zombie")
+                {
+                    gameObject.AddComponent<Zombie>();
+                    Destroy(gameObject.GetComponent<Villagers>());
+                }
+            }
         }
 
         public enum Names // Este Enum abriga los nombres.
