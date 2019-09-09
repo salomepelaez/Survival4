@@ -55,9 +55,8 @@ public class Manager : MonoBehaviour
             // El siguiente bloque de código se encarga de generar el héroe, está separado pues a diferencia de los miembros de la aldea, solo debe ser creado una vez.
             if (j == 0)
             {
-                print("se crea hero");
                 thePeople.AddComponent<Hero>(); // Se le agregan los componentes de la clase Hero.
-                //thePeople.AddComponent<HeroAim>(); // Igualmente se le agregan los componentes de HeroAim.
+                thePeople.AddComponent<HeroAim>(); // Igualmente se le agregan los componentes de HeroAim.
                 thePeople.GetComponent<Renderer>().material.color = Color.black; // Se le asignó color negro para diferenciarlos de otros objetos.
             }
 
