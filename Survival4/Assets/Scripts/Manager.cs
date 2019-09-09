@@ -8,6 +8,8 @@ using NPC.Ally;
 
 public class Manager : MonoBehaviour
 {
+    public static bool inGame = true;
+
     GameObject thePeople;
 
     System.Random random = new System.Random();
@@ -18,6 +20,7 @@ public class Manager : MonoBehaviour
     // Las siguientes variables del tipo texto son las que abrigan los contadores del Canvas.
     public Text ZombiesNum;
     public Text VillagersNum;
+    public Text GameOver;
 
     public static float sHero; // En esta línea se declara la velocidad estática del héroe, que luego se utiliza en la clase Hero.
     public static float firstAge;
@@ -32,6 +35,8 @@ public class Manager : MonoBehaviour
     void Awake()
     {
         sHero = Random.Range(0.1f, 0.2f);
+
+        // Velocidades de los NPC
         firstAge = Random.Range(0.1f, 0.2f);
         secondAge = Random.Range(0.07f, 0.1f);
         thirdAge = Random.Range(0.03f, 0.05f);
@@ -72,23 +77,33 @@ public class Manager : MonoBehaviour
                         break;
                 }
             }
+        }
+    }
 
-            // El siguiente bloque de código genera los contadores de NPC´s en la escena.
-            int v = 0;
-            int z = 0;
+    private void Start()
+    {
+        if(inGame == false)
+        {
 
-            foreach (Zombie zombie in Transform.FindObjectsOfType<Zombie>())
-            {
-                z = z + 1;
-                ZombiesNum.text = "Zombies: " + z;
-            }
+        }
+    }
 
-            foreach (Villagers villagers in Transform.FindObjectsOfType<Villagers>())
-            {
-                v = v + 1;
-                VillagersNum.text = "Villagers: " + v;
-            }
+    private void Update()
+    {
+        // El siguiente bloque de código genera los contadores de NPC´s en la escena.
+        int v = 0;
+        int z = 0;
 
+        foreach (Zombie zombie in Transform.FindObjectsOfType<Zombie>())
+        {
+            z = z + 1;
+            ZombiesNum.text = "Zombies: " + z;
+        }
+
+        foreach (Villagers villagers in Transform.FindObjectsOfType<Villagers>())
+        {
+            v = v + 1;
+            VillagersNum.text = "Villagers: " + v;
         }
     }
 }
