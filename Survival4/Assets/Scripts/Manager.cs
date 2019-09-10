@@ -50,8 +50,8 @@ public class Manager : MonoBehaviour
 
             // El Vector3 de posición es el que servirá para generar los cubos en una posición aleatoria.
             Vector3 posicion = new Vector3();
-            posicion.x = Random.Range(-30, 30);
-            posicion.z = Random.Range(-30, 30);
+            posicion.x = Random.Range(-50, 50);
+            posicion.z = Random.Range(-50, 50);
             thePeople.transform.position = posicion; // A los cubos se les asigna la posición aleatoria antes mencionada.
             
             thePeople.AddComponent<Rigidbody>(); // Se les agrega Rigidbody.
@@ -107,7 +107,7 @@ public class Manager : MonoBehaviour
 
     public string GameOver()
     {
-        message = "GameOver";
+        message = "Game Over";
 
         return message;
     }

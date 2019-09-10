@@ -85,13 +85,13 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
             public Names peopleNames;
 
 
-            /*public static explicit operator ZombieData(VillagersData vD)
+            public static explicit operator ZombieData(VillagersData vD)
             {
                 ZombieData zD = new ZombieData();
-                zD.peopleNames = vD.peopleNames;
+                zD.age = vD.age;
 
                 return zD;
-            }*/
+            }
         }
     }
 }

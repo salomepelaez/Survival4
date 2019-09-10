@@ -14,9 +14,9 @@ public class NPCConduct : MonoBehaviour
     {
         if (Manager.inGame == true)
         {
-            float npcSpeed = 0.5f; // Se creó una variable para la velocidad de los zombies.
+            float npcSpeed = 0.1f; // Se creó una variable para la velocidad de los zombies.
             float rotationSpeed = 25f; // Se creó una variable mucho mayor que la velocidad general del zombie, para que su rotación pueda ser visible.
-            float runningSpeed = 0.1f;
+            float runningSpeed = 0.2f;
 
             if (move == "Moving")
             {
@@ -37,7 +37,7 @@ public class NPCConduct : MonoBehaviour
 
             foreach (Zombie zombie in Transform.FindObjectsOfType<Zombie>())
             {
-                if (attackRange < 0.05f)
+                if (attackRange < 0.5f)
                 {
                     m = Move.Pursuing;
                 }

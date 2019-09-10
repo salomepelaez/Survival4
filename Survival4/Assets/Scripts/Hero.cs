@@ -30,6 +30,11 @@ public class Hero : MonoBehaviour
 
         pov.transform.SetParent(this.transform);
         pov.transform.localPosition = Vector3.zero;
+
+        if(attackRange < 5f)
+        {
+            StartCoroutine("PrintZMessages");
+        }
     }
 
     //Rotación en Y.
@@ -37,28 +42,24 @@ public class Hero : MonoBehaviour
     {
         float rotat = transform.eulerAngles.y;
         transform.rotation = Quaternion.Euler(0.0f, rotat, 0.0f);
-
-        if(attackRange < 0.05f)
-        {
-            StartCoroutine("PrintZMessages");
-        }
-
     }
 
     IEnumerator PrintVMessages()
     {
         Message.text = Villagers.vNames;
 
-        yield return new WaitForSeconds(1);
-        //Destroy(Message);
+        yield return new WaitForSeconds(3);
+
+        Message.text = "";
     }
 
     IEnumerator PrintZMessages()
     {
         Message.text = Zombie.zMessage;
 
-        yield return new WaitForSeconds(1);
-        //Destroy(Message);
+        yield return new WaitForSeconds(3);
+
+        Message.text = "";
     }
 
     // La siguiente función es la encargada de imprimir los mensajes cuando hay colisión, utilizando las etiquetas.
