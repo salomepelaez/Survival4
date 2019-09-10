@@ -14,9 +14,9 @@ public class NPCConduct : MonoBehaviour
     {
         if (Manager.inGame == true)
         {
-            float npcSpeed = 0.1f; // Se creó una variable para la velocidad de los zombies.
+            float npcSpeed = 0.2f; // Se creó una variable para la velocidad de los zombies.
             float rotationSpeed = 25f; // Se creó una variable mucho mayor que la velocidad general del zombie, para que su rotación pueda ser visible.
-            float runningSpeed = 0.2f;
+            //float runningSpeed = 0.2f;
 
             if (move == "Moving")
             {
@@ -49,7 +49,7 @@ public class NPCConduct : MonoBehaviour
                 }
             }
 
-            foreach (Villagers villagers in Transform.FindObjectsOfType<Villagers>())
+            /*foreach (Villagers villagers in Transform.FindObjectsOfType<Villagers>())
             {
                 if (attackRange < 0.05f)
                 {
@@ -61,7 +61,7 @@ public class NPCConduct : MonoBehaviour
                     direction = Vector3.Normalize(target.transform.position - transform.position);
                     transform.position -= direction * runningSpeed * Time.deltaTime;
                 }
-            }
+            }*/
         }
     }
 

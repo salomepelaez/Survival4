@@ -102,6 +102,7 @@ public class Manager : MonoBehaviour
         {
             v = v + 1;
             VillagersNum.text = "Villagers: " + v;
+
         }
     }
 

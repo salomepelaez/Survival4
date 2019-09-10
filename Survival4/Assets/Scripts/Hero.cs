@@ -31,10 +31,6 @@ public class Hero : MonoBehaviour
         pov.transform.SetParent(this.transform);
         pov.transform.localPosition = Vector3.zero;
 
-        if(attackRange < 5f)
-        {
-            StartCoroutine("PrintZMessages");
-        }
     }
 
     //Rotación en Y.
@@ -42,6 +38,11 @@ public class Hero : MonoBehaviour
     {
         float rotat = transform.eulerAngles.y;
         transform.rotation = Quaternion.Euler(0.0f, rotat, 0.0f);
+
+        /*if (attackRange < 0.5f)
+        {
+            StartCoroutine("PrintZMessages");
+        }*/
     }
 
     IEnumerator PrintVMessages()
@@ -57,7 +58,7 @@ public class Hero : MonoBehaviour
     {
         Message.text = Zombie.zMessage;
 
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
 
         Message.text = "";
     }
