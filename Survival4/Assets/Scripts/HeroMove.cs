@@ -9,7 +9,10 @@ public class HeroMove : MonoBehaviour
 
     void Update()
     {
-        Move(); // La función es llamada.
+        if (Manager.inGame == true)
+        {
+            Move(); // La función es llamada.
+        }
     }
 
     private void Move() // Se creó una función para el movimiento, que luego es llamada en el Update.

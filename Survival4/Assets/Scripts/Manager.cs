@@ -20,7 +20,8 @@ public class Manager : MonoBehaviour
     // Las siguientes variables del tipo texto son las que abrigan los contadores del Canvas.
     public Text ZombiesNum;
     public Text VillagersNum;
-    public Text GameOver;
+    public string message;
+    public static string goMessage;
 
     public static float sHero; // En esta línea se declara la velocidad estática del héroe, que luego se utiliza en la clase Hero.
     public static float firstAge;
@@ -82,10 +83,7 @@ public class Manager : MonoBehaviour
 
     private void Start()
     {
-        if(inGame == false)
-        {
-
-        }
+        goMessage = GameOver();
     }
 
     private void Update()
@@ -105,6 +103,13 @@ public class Manager : MonoBehaviour
             v = v + 1;
             VillagersNum.text = "Villagers: " + v;
         }
+    }
+
+    public string GameOver()
+    {
+        message = "GameOver";
+
+        return message;
     }
 }
 

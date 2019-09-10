@@ -14,37 +14,40 @@ public class HeroAim : MonoBehaviour
     // El siguiente bloque de código se encarga de generar la rotación de la cámara en los ejes X y Y. 
     void Update()
     {
-        mouseX += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
-        axisLimit = mouseY;
-
-        if (InvertedMouse)
+        if (Manager.inGame == true)
         {
-            mouseY += Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
+            mouseX += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
+            axisLimit = mouseY;
+
+            if (InvertedMouse)
+            {
+                mouseY += Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
+            }
+
+            else
+            {
+                mouseY -= Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
+            }
+
+            /* 
+            * Adicional a esto, utilizando la variable para el límite, se procedió a indicar cuál es el máximo de rotación
+            * permitida para un jugador, evitando así que este pueda girar complemtamente sobre sí mismo, y se pierda 
+            * la utilidad de la cámara.
+            */
+
+            if (axisLimit > 90.0f)
+            {
+                axisLimit = 90.0f;
+                mouseY = 90.0f;
+            }
+
+            else if (axisLimit < -90.0f)
+            {
+                axisLimit = -90.0f;
+                mouseY = -90.0f;
+            }
+
+            transform.eulerAngles = new Vector3(mouseY, mouseX, 0);
         }
-
-        else
-        {
-            mouseY -= Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
-        }
-
-        /* 
-        * Adicional a esto, utilizando la variable para el límite, se procedió a indicar cuál es el máximo de rotación
-        * permitida para un jugador, evitando así que este pueda girar complemtamente sobre sí mismo, y se pierda 
-        * la utilidad de la cámara.
-        */
-
-        if (axisLimit > 90.0f)
-        {
-            axisLimit = 90.0f;
-            mouseY = 90.0f;
-        }
-
-        else if (axisLimit < -90.0f)
-        {
-            axisLimit = -90.0f;
-            mouseY = -90.0f;
-        }
-
-        transform.eulerAngles = new Vector3(mouseY, mouseX, 0);
     }
 }

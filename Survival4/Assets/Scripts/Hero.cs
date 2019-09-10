@@ -12,6 +12,7 @@ public class Hero : MonoBehaviour
     GameObject pov; // Se creó un GameObject al que se le asignarán los componentes de la cámara. (pov: point of view)
     public readonly float sHero = Manager.sHero; // La variable se asignó como readonly, obteniéndola desde la clase Manager.
     public Text Message;
+    public Text GameOver;
     float attackRange = 0;
 
     void Start()
@@ -25,6 +26,7 @@ public class Hero : MonoBehaviour
         gameObject.AddComponent<HeroMove>();
         gameObject.GetComponent<HeroMove>().speed = sHero; // Se utilizaron los miembros del Enum "Speed", y se reasigna la velocidad.
         Message = GameObject.Find("VMessage").GetComponent<Text>();
+        GameOver = GameObject.Find("GameOver").GetComponent<Text>();
 
         pov.transform.SetParent(this.transform);
         pov.transform.localPosition = Vector3.zero;
@@ -71,6 +73,7 @@ public class Hero : MonoBehaviour
         if (collision.transform.tag == "Zombie")
         {
             Manager.inGame = false;
+            GameOver.text = Manager.goMessage;
         }
     }
 
