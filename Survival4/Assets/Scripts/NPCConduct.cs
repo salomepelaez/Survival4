@@ -8,9 +8,7 @@ public class NPCConduct : MonoBehaviour
 {
     Vector3 direction;
     float attackRange;
-    float attackVRange;
     public Transform target;
-    public Transform target2;
     Vector3 targetDistance; 
 
     public void Update()
@@ -18,7 +16,6 @@ public class NPCConduct : MonoBehaviour
         if (Manager.inGame == true)
         {
             attackRange = Vector3.Distance(target.position, transform.position);
-            attackVRange = Vector3.Distance(target2.position, transform.position);
             float npcSpeed = 0.3f; // Se creó una variable para la velocidad de los zombies.
             float rotationSpeed = 25f; // Se creó una variable mucho mayor que la velocidad general del zombie, para que su rotación pueda ser visible.
             //float runningSpeed = 0.2f;
@@ -43,17 +40,10 @@ public class NPCConduct : MonoBehaviour
             
             if (attackRange < 5.0f)
             {               
-                Debug.Log(attackRange);
+                //Debug.Log(attackRange);
                 direction = Vector3.Normalize(target.transform.position - transform.position);
                 transform.position += direction * npcSpeed * Time.deltaTime;
             }
-
-            if(attackVRange < 5.0f)
-            {
-                direction = Vector3.Normalize(target2.transform.position - transform.position);
-                transform.position += direction * npcSpeed * Time.deltaTime;
-            }
-
         }
     }
 

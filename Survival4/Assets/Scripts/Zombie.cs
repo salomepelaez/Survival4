@@ -18,8 +18,7 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
             public void Start()
             {
                 target = FindObjectOfType<Hero>().GetComponent<Transform>();
-                target2 = FindObjectOfType<Villagers>().GetComponent<Transform>();
-
+                
                 zombieData.taste = (MyTaste)Random.Range(0, 5); // Al igual que en la clase "Villagers", la variable Random se utilizó en el Start para asignarla una vez por objeto.  
                 Coloring(); // Se llamó a la función que asigna los colores.
                 InvokeRepeating("NPCMove", 3.0f, 3.0f);

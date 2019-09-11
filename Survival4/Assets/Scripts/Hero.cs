@@ -43,29 +43,32 @@ public class Hero : MonoBehaviour
     {
         float rotat = transform.eulerAngles.y;
         transform.rotation = Quaternion.Euler(0.0f, rotat, 0.0f); 
-        zombieAttack = Vector3.Distance(target.transform.position, transform.position);
+        zombieAttack = Vector3.Distance(target.position, transform.position);
 
-        if (zombieAttack < 5.0f)
+        if (zombieAttack <= 5.0f)
         {
             StartCoroutine("PrintZMessages");
         }  
-        Debug.Log(zombieAttack); 
+       
     }
 
     IEnumerator PrintMessages()
     {
         Message.text = Villagers.vNames;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(3);
+        Message.text = "";
     }
 
     IEnumerator PrintZMessages()
     {
+        
         Message.text = Zombie.zMessage;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(3);
         if (zombieAttack > 5.0f)
         {
             Message.text = "";
         }
+        
     }    
        
             
