@@ -7,13 +7,15 @@ using NPC.Ally;
 public class NPCConduct : MonoBehaviour
 {
     Vector3 direction;
-    public float attackRange = 0;
+    float attackRange;
     public Transform target;
+    Vector3 targetDistance; 
 
     public void Update()
     {
         if (Manager.inGame == true)
         {
+            attackRange = Vector3.Distance(target.position, transform.position);
             float npcSpeed = 0.2f; // Se creó una variable para la velocidad de los zombies.
             float rotationSpeed = 25f; // Se creó una variable mucho mayor que la velocidad general del zombie, para que su rotación pueda ser visible.
             //float runningSpeed = 0.2f;
@@ -35,33 +37,17 @@ public class NPCConduct : MonoBehaviour
                 transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
             }
 
-            foreach (Zombie zombie in Transform.FindObjectsOfType<Zombie>())
-            {
-                if (attackRange < 0.5f)
-                {
-                    m = Move.Pursuing;
-                }
 
-                if (m == Move.Pursuing)
-                {
-                    direction = Vector3.Normalize(target.transform.position - transform.position);
-                    transform.position += direction * npcSpeed * Time.deltaTime;
-                }
+            else if (attackRange < 5.0f)
+            {
+                m = Move.Pursuing;
             }
 
-            /*foreach (Villagers villagers in Transform.FindObjectsOfType<Villagers>())
+            if (m == Move.Pursuing)
             {
-                if (attackRange < 0.05f)
-                {
-                    m = Move.Running;
-                }
-
-                if (m == Move.Running)
-                {
-                    direction = Vector3.Normalize(target.transform.position - transform.position);
-                    transform.position -= direction * runningSpeed * Time.deltaTime;
-                }
-            }*/
+                direction = Vector3.Normalize(target.transform.position - transform.position);
+                transform.position += direction * npcSpeed * Time.deltaTime;
+            }
         }
     }
 

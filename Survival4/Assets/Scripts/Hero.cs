@@ -13,7 +13,10 @@ public class Hero : MonoBehaviour
     public readonly float sHero = Manager.sHero; // La variable se asignó como readonly, obteniéndola desde la clase Manager.
     public Text Message;
     public Text GameOver;
-    float attackRange = 0;
+
+    float zombieAttack;
+    Vector3 targetDistance;
+    public Transform target;
 
     void Start()
     {
@@ -31,44 +34,49 @@ public class Hero : MonoBehaviour
         pov.transform.SetParent(this.transform);
         pov.transform.localPosition = Vector3.zero;
 
+        target = FindObjectOfType<Zombie>().GetComponent<Transform>();
+        
     }
 
     //Rotación en Y.
     public void Update()
     {
         float rotat = transform.eulerAngles.y;
-        transform.rotation = Quaternion.Euler(0.0f, rotat, 0.0f);
+        transform.rotation = Quaternion.Euler(0.0f, rotat, 0.0f); 
+        zombieAttack = Vector3.Distance(target.position, transform.position);
 
-        /*if (attackRange < 0.5f)
+        Debug.Log(zombieAttack);
+        if (zombieAttack < 5.0f)
         {
             StartCoroutine("PrintZMessages");
-        }*/
-    }
+        }   
+}
 
-    IEnumerator PrintVMessages()
+    IEnumerator PrintMessages()
     {
         Message.text = Villagers.vNames;
-
         yield return new WaitForSeconds(3);
-
         Message.text = "";
     }
 
     IEnumerator PrintZMessages()
     {
+        
         Message.text = Zombie.zMessage;
-
-        yield return new WaitForSeconds(2);
-
+        yield return new WaitForSeconds(5);
         Message.text = "";
-    }
+        
+    }    
+       
+            
+    
 
     // La siguiente función es la encargada de imprimir los mensajes cuando hay colisión, utilizando las etiquetas.
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.tag == "Villager")
         {
-            StartCoroutine("PrintVMessages");
+            StartCoroutine("PrintMessages");
 
         }
 
