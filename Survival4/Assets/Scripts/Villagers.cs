@@ -16,6 +16,8 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
             public string message;
             public static string vNames;
 
+            public List<GameObject> familyAndFriends = new List<GameObject>();
+
             void Start()
             {
                 target = FindObjectOfType<Zombie>().GetComponent<Transform>();
