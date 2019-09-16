@@ -70,10 +70,7 @@ public class Hero : MonoBehaviour
             Message.text = "";
         }
         
-    }    
-       
-            
-    
+    }  
 
     // La siguiente función es la encargada de imprimir los mensajes cuando hay colisión, utilizando las etiquetas.
     public void OnCollisionEnter(Collision collision)

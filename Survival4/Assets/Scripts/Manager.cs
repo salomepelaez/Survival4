@@ -37,11 +37,6 @@ public class Manager : MonoBehaviour
     {
         sHero = Random.Range(0.1f, 0.2f);
 
-        // Velocidades de los NPC
-        firstAge = Random.Range(0.1f, 0.2f);
-        secondAge = Random.Range(0.07f, 0.1f);
-        thirdAge = Random.Range(0.03f, 0.05f);
-
         int rnd = Random.Range(minGen, maxGen); // La generación es producida entre el mínimo de objetos y el máximo.
 
         for (int j = 0; j < rnd; j++) // Este For genera los objetos siguiendo los límites establecidos.

@@ -6,6 +6,7 @@ using NPC.Ally;
 
 public class NPCConduct : MonoBehaviour
 {
+    public float npcSpeed = 0.3f;
     Vector3 direction;
     float attackRange;
     public Transform target;
@@ -15,7 +16,6 @@ public class NPCConduct : MonoBehaviour
         if (Manager.inGame == true)
         {
             attackRange = Vector3.Distance(target.position, transform.position);
-            float npcSpeed = 0.3f; // Se creó una variable para la velocidad de los zombies.
             float rotationSpeed = 25f; // Se creó una variable mucho mayor que la velocidad general del zombie, para que su rotación pueda ser visible.
             //float runningSpeed = 0.2f;
 

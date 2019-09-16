@@ -37,13 +37,13 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
                 InvokeRepeating("NPCAssignment", 3.0f, 3.0f);
 
                 vNames = PrintNames();
+
+                npcSpeed = (15f * npcSpeed) / villagersData.age;              
             }
 
             private void Update()
             {
                 NPCMove();
-
-                float npcSpeed = 0.3f;
                 Zombie closest = null;
                 float closestDistance = 5.0f;
 

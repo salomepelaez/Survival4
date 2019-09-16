@@ -30,13 +30,15 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
                 zMessage = PrintMessages();
 
                 zombieData.age = Random.Range(15, 101);
+
+                npcSpeed = (15f * npcSpeed) / zombieData.age;
+                
             }
 
             private void Update()
             {
                 NPCMove();
 
-                float npcSpeed = 0.3f;
                 Villagers closest = null;
                 float closestDistance = 5.0f;
 
