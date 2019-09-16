@@ -34,7 +34,8 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
 
                 InvokeRepeating("NPCAssignment", 3.0f, 3.0f);
                 
-                npcSpeed = (15f * npcSpeed) / villagersData.age;              
+                npcSpeed = (15f * npcSpeed) / villagersData.age;
+                              
             }
 
             private void Update()
@@ -102,7 +103,7 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
             public int age;
             public Names peopleNames;
 
-            public static explicit operator ZombieData(VillagersData vD)
+            public static implicit operator ZombieData(VillagersData vD)
             {
                 ZombieData zD = new ZombieData();
                 zD.age = vD.age;
