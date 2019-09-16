@@ -10,9 +10,7 @@ public class NPCConduct : MonoBehaviour
     float attackRange;
     public Transform target;
 
-    public List<Villagers> FamilyAndFriends = new List<Villagers>();
-
-    public void Update()
+    public void NPCMove()
     {
         if (Manager.inGame == true)
         {
@@ -44,28 +42,6 @@ public class NPCConduct : MonoBehaviour
                 direction = Vector3.Normalize(target.transform.position - transform.position);
                 transform.position += direction * npcSpeed * Time.deltaTime;
             }
-
-            Villagers closest = null;
-            float closestDistance = 5.0f;
-
-            foreach (var v in FamilyAndFriends)
-            {
-                float distance = Vector3.Distance(v.transform.position, transform.position);
-
-                if(distance < closestDistance)
-                {
-                    closest = v;
-                    closestDistance = distance;
-                    direction = Vector3.Normalize(v.transform.position - transform.position);
-                    transform.position += direction * npcSpeed * Time.deltaTime;
-                }
-
-                Debug.Log(closestDistance);
-            }    
-                
-            
-
-            
         }
     }
 
@@ -73,7 +49,7 @@ public class NPCConduct : MonoBehaviour
     string move;
 
     // Esta es la función de movimiento antes mencionada.
-    void NPCMove() // Se encarga de asignar variables aleatorias, creando las posibilidades de dirección.
+    void NPCAssignment() // Se encarga de asignar variables aleatorias, creando las posibilidades de dirección.
     {
         switch (Random.Range(0, 6))
         {

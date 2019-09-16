@@ -15,18 +15,45 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
             public string message;
             public static string zMessage;
 
+            Vector3 direction;
+            float attackRange;
+
             public void Start()
             {
                 target = FindObjectOfType<Hero>().GetComponent<Transform>();
                 
                 zombieData.taste = (MyTaste)Random.Range(0, 5); // Al igual que en la clase "Villagers", la variable Random se utilizó en el Start para asignarla una vez por objeto.  
                 Coloring(); // Se llamó a la función que asigna los colores.
-                InvokeRepeating("NPCMove", 3.0f, 3.0f);
+                InvokeRepeating("NPCAssignment", 3.0f, 3.0f);
                 transform.tag = "Zombie"; // Se cambió el nombre de la etiqueta.
                 transform.name = "Zombie"; // Se cambió el nombre del objeto para poder identificarlo fácilmente.
                 zMessage = PrintMessages();
 
                 zombieData.age = Random.Range(15, 101);
+            }
+
+            private void Update()
+            {
+                NPCMove();
+
+                float npcSpeed = 0.3f;
+                Villagers closest = null;
+                float closestDistance = 5.0f;
+
+                foreach (var v in FindObjectsOfType<Villagers>())
+                {
+                    float distance = Vector3.Distance(v.transform.position, transform.position);
+
+                    if (distance < closestDistance)
+                    {
+                        closest = v;
+                        closestDistance = distance;
+                        direction = Vector3.Normalize(v.transform.position - transform.position);
+                        transform.position += direction * npcSpeed * Time.deltaTime;
+                    }
+
+                    Debug.Log(closestDistance);
+                }
             }
 
             public string PrintMessages() // Esta función se encarga de generar los mensajes, utilizando los miembros del Enum.

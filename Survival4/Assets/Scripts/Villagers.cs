@@ -31,12 +31,15 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
                 villagersData.age = Random.Range(15, 101);
                 villagersData.peopleNames = (Names)Random.Range(0, 20);
 
-                InvokeRepeating("NPCMove", 3.0f, 3.0f);
+                InvokeRepeating("NPCAssignment", 3.0f, 3.0f);
 
                 vNames = PrintNames();
             }
 
-            
+            private void Update()
+            {
+                NPCMove();
+            }
             public string PrintNames()
             {
                 message = "Hola soy " + villagersData.peopleNames + ". Y tengo " + villagersData.age + " años.";
