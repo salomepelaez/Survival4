@@ -16,7 +16,6 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
             public static string zMessage;
 
             Vector3 direction;
-            float attackRange;
 
             public void Start()
             {
@@ -27,8 +26,7 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
                 InvokeRepeating("NPCAssignment", 3.0f, 3.0f);
                 transform.tag = "Zombie"; // Se cambió el nombre de la etiqueta.
                 transform.name = "Zombie"; // Se cambió el nombre del objeto para poder identificarlo fácilmente.
-                zMessage = PrintMessages();
-
+                
                 zombieData.age = Random.Range(15, 101);
 
                 npcSpeed = (15f * npcSpeed) / zombieData.age;
@@ -54,13 +52,21 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
                         transform.position += direction * npcSpeed * Time.deltaTime;
                     }
                 }
+
+                float zombieAttack = Vector3.Distance(target.position, transform.position); 
+
+                if (zombieAttack <= 5.0f && closest == null)
+                {
+                    StartCoroutine("PrintMessages");
+                }
+                
             }
 
-            public string PrintMessages() // Esta función se encarga de generar los mensajes, utilizando los miembros del Enum.
+            IEnumerator PrintMessages()
             {
-                message = "Waaaarr, soy un Zombie, quiero comer " + zombieData.taste + ", y tengo " + zombieData.age + " años.";
-            
-                return message;
+                Hero.Message.text = "Waaaarr, soy un Zombie, quiero comer " + zombieData.taste + ", y tengo " + zombieData.age + " años.";
+                yield return new WaitForSeconds(3);
+                Hero.Message.text = "";
             }
 
             public ZombieColor mC;

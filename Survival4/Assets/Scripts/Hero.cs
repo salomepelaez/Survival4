@@ -11,12 +11,10 @@ public class Hero : MonoBehaviour
     HeroData hs; // Se creó una variable del Struct.
     GameObject pov; // Se creó un GameObject al que se le asignarán los componentes de la cámara. (pov: point of view)
     public readonly float sHero = Manager.sHero; // La variable se asignó como readonly, obteniéndola desde la clase Manager.
-    public Text Message;
+    public static Text Message;
     public Text GameOver;
-
-    float zombieAttack;
     Vector3 targetDistance;
-    public Transform target;
+    public GameObject[] target;
 
     void Start()
     {
@@ -34,23 +32,15 @@ public class Hero : MonoBehaviour
         pov.transform.SetParent(this.transform);
         pov.transform.localPosition = Vector3.zero;
 
-        target = FindObjectOfType<Zombie>().GetComponent<Transform>();
         
+
     }
 
     //Rotación en Y.
     public void Update()
     {
         float rotat = transform.eulerAngles.y;
-        transform.rotation = Quaternion.Euler(0.0f, rotat, 0.0f); 
-        zombieAttack = Vector3.Distance(target.position, transform.position);
-
-        if (zombieAttack <= 5.0f)
-        {
-            StartCoroutine("PrintZMessages");
-        }  
-       
-       //Debug.Log(zombieAttack);
+        transform.rotation = Quaternion.Euler(0.0f, rotat, 0.0f);
     }
 
     IEnumerator PrintMessages()
@@ -60,17 +50,7 @@ public class Hero : MonoBehaviour
         Message.text = "";
     }
 
-    IEnumerator PrintZMessages()
-    {
-        
-        Message.text = Zombie.zMessage;
-        yield return new WaitForSeconds(3);
-        if (zombieAttack > 5.0f)
-        {
-            Message.text = "";
-        }
-        
-    }  
+  
 
     // La siguiente función es la encargada de imprimir los mensajes cuando hay colisión, utilizando las etiquetas.
     public void OnCollisionEnter(Collision collision)
