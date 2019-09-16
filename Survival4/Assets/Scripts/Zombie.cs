@@ -112,6 +112,8 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
             public MyTaste taste;
             public ZombieColor mC;
             public int age;
+
+            
         }
 
         public enum MyTaste // Enum de los gustos
