@@ -51,8 +51,6 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
                         direction = Vector3.Normalize(v.transform.position - transform.position);
                         transform.position += direction * npcSpeed * Time.deltaTime;
                     }
-
-                    Debug.Log(closestDistance);
                 }
             }
 

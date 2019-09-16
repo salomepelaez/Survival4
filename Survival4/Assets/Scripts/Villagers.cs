@@ -16,6 +16,9 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
             public string message;
             public static string vNames;
 
+            Vector3 direction;
+            float attackRange;
+
             void Start()
             {
                 target = FindObjectOfType<Zombie>().GetComponent<Transform>();
@@ -39,7 +42,25 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
             private void Update()
             {
                 NPCMove();
+
+                float npcSpeed = 0.3f;
+                Zombie closest = null;
+                float closestDistance = 5.0f;
+
+                foreach (var v in FindObjectsOfType<Zombie>())
+                {
+                    float distance = Vector3.Distance(v.transform.position, transform.position);
+
+                    if (distance < closestDistance)
+                    {
+                        closest = v;
+                        closestDistance = distance;
+                        direction = Vector3.Normalize(v.transform.position - transform.position);
+                        transform.position -= direction * npcSpeed * Time.deltaTime;
+                    }
+                }
             }
+
             public string PrintNames()
             {
                 message = "Hola soy " + villagersData.peopleNames + ". Y tengo " + villagersData.age + " años.";

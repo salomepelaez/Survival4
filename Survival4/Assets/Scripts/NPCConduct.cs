@@ -72,11 +72,9 @@ public class NPCConduct : MonoBehaviour
 
     public enum Move // Enum del movimiento
     {
-        Running,
         Idle,
         Moving,
-        Rotating,
-        Pursuing
+        Rotating
     }
 
     public struct NPCData
