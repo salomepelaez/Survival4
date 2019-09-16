@@ -9,7 +9,8 @@ public class NPCConduct : MonoBehaviour
     Vector3 direction;
     float attackRange;
     public Transform target;
-    Vector3 targetDistance; 
+
+    public List<Villagers> FamilyAndFriends = new List<Villagers>();
 
     public void Update()
     {
@@ -39,11 +40,32 @@ public class NPCConduct : MonoBehaviour
 
             
             if (attackRange < 5.0f)
-            {               
-                //Debug.Log(attackRange);
+            {   
                 direction = Vector3.Normalize(target.transform.position - transform.position);
                 transform.position += direction * npcSpeed * Time.deltaTime;
             }
+
+            Villagers closest = null;
+            float closestDistance = 5.0f;
+
+            foreach (var v in FamilyAndFriends)
+            {
+                float distance = Vector3.Distance(v.transform.position, transform.position);
+
+                if(distance < closestDistance)
+                {
+                    closest = v;
+                    closestDistance = distance;
+                    direction = Vector3.Normalize(v.transform.position - transform.position);
+                    transform.position += direction * npcSpeed * Time.deltaTime;
+                }
+
+                Debug.Log(closestDistance);
+            }    
+                
+            
+
+            
         }
     }
 

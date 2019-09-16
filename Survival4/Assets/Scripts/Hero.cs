@@ -50,6 +50,7 @@ public class Hero : MonoBehaviour
             StartCoroutine("PrintZMessages");
         }  
        
+       //Debug.Log(zombieAttack);
     }
 
     IEnumerator PrintMessages()

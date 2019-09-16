@@ -68,7 +68,7 @@ public class Manager : MonoBehaviour
 
             else
             {
-                switch (change) // La primera posibilidad del Random genera los zombies, la segunda los aldeanos.
+                switch (change) 
                 {
                     case 0:
                         thePeople.AddComponent<Zombie>(); // Se agregan los componentes de su respectiva clase.
