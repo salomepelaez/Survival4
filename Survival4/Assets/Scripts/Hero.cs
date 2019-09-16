@@ -31,9 +31,6 @@ public class Hero : MonoBehaviour
 
         pov.transform.SetParent(this.transform);
         pov.transform.localPosition = Vector3.zero;
-
-        
-
     }
 
     //Rotación en Y.
@@ -43,9 +40,9 @@ public class Hero : MonoBehaviour
         transform.rotation = Quaternion.Euler(0.0f, rotat, 0.0f);
     }
 
-    IEnumerator PrintMessages()
+    IEnumerator PrintMessages(Villagers villager )
     {
-        Message.text = Villagers.vNames;
+        Message.text = villager.PrintNames();
         yield return new WaitForSeconds(3);
         Message.text = "";
     }
@@ -57,7 +54,7 @@ public class Hero : MonoBehaviour
     {
         if (collision.transform.tag == "Villager")
         {
-            StartCoroutine("PrintMessages");
+            StartCoroutine("PrintMessages", collision.transform.GetComponent<Villagers>());
 
         }
 

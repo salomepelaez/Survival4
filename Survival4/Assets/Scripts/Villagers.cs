@@ -12,9 +12,7 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
     {
         public class Villagers : NPCConduct
         {
-            public VillagersData villagersData; // Se creó una variable del Struct.
-            public string message;
-            public static string vNames;
+            public  VillagersData villagersData; // Se creó una variable del Struct.
 
             Vector3 direction;
             float attackRange;
@@ -35,9 +33,7 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
                 villagersData.peopleNames = (Names)Random.Range(0, 20);
 
                 InvokeRepeating("NPCAssignment", 3.0f, 3.0f);
-
-                vNames = PrintNames();
-
+                
                 npcSpeed = (15f * npcSpeed) / villagersData.age;              
             }
 
@@ -63,9 +59,7 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
 
             public string PrintNames()
             {
-                message = "Hola soy " + villagersData.peopleNames + ". Y tengo " + villagersData.age + " años.";
-            
-                return message;
+                return "Hola soy " + villagersData.peopleNames + ". Y tengo " + villagersData.age + " años.";
             }
 
 
@@ -107,7 +101,6 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
         {
             public int age;
             public Names peopleNames;
-
 
             public static explicit operator ZombieData(VillagersData vD)
             {
