@@ -27,7 +27,10 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
                 transform.tag = "Zombie"; // Se cambió el nombre de la etiqueta.
                 transform.name = "Zombie"; // Se cambió el nombre del objeto para poder identificarlo fácilmente.
                 
-                zombieData.age = Random.Range(15, 101);
+                if(zombieData.age == 0)
+                    zombieData.age = Random.Range(15, 101);
+
+
 
                 npcSpeed = (15f * npcSpeed) / zombieData.age;
                 

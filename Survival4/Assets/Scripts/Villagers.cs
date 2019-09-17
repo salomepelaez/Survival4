@@ -68,7 +68,7 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
             {
                 if (collision.transform.tag == "Zombie")
                 {
-                    gameObject.AddComponent<Zombie>();
+                    gameObject.AddComponent<Zombie>().zombieData = (ZombieData) GetComponent<Villagers>().villagersData;
                     Destroy(gameObject.GetComponent<Villagers>());
                 }
             }
@@ -103,7 +103,7 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
             public int age;
             public Names peopleNames;
 
-            public static implicit operator ZombieData(VillagersData vD)
+            public static explicit operator ZombieData(VillagersData vD)
             {
                 ZombieData zD = new ZombieData();
                 zD.age = vD.age;
