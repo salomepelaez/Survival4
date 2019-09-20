@@ -8,11 +8,11 @@ using NPC.Ally;
 
 public class Manager : MonoBehaviour
 {
-    public static bool inGame = true;
+    public static bool inGame = true; // Se creó un booleano que controla el estado activo del juego.
 
-    GameObject thePeople;
+    GameObject thePeople; // Se creó un GameoObject con este nombre, pues será utilizado para Zombies, Ciudadanos y Héroe.
 
-    System.Random random = new System.Random();
+    System.Random random = new System.Random(); 
 
     public const int maxGen = 25; // Se creó una variable constante para el número máximo de generación.
     public readonly int minGen; // Se declaró un readonly para el mínimo posible de generación de objetos. 
@@ -24,10 +24,8 @@ public class Manager : MonoBehaviour
     public static string goMessage;
 
     public static float sHero; // En esta línea se declara la velocidad estática del héroe, que luego se utiliza en la clase Hero.
-    public static float firstAge;
-    public static float secondAge;
-    public static float thirdAge;
 
+    // A continuación en el constructor se asignó el número aleatorio para el mínimo de la creación de objetos.
     public Manager()
     {
         minGen = random.Next(5, 15);
@@ -53,7 +51,7 @@ public class Manager : MonoBehaviour
             thePeople.GetComponent<Rigidbody>().freezeRotation = true;
             int change = Random.Range(0, 2); // Se creó un Random con dos únicas opciones.
 
-            // El siguiente bloque de código se encarga de generar el héroe, está separado pues a diferencia de los miembros de la aldea, solo debe ser creado una vez.
+            // El siguiente bloque de código se encarga de generar el héroe, está separado, pues a diferencia de los miembros de la aldea, solo debe ser creado una vez.
             if (j == 0)
             {
                 thePeople.AddComponent<Hero>(); // Se le agregan los componentes de la clase Hero.
@@ -78,7 +76,7 @@ public class Manager : MonoBehaviour
 
     private void Start()
     {
-        goMessage = GameOver();
+        goMessage = GameOver(); // Se asignó el mensaje para el momento en el que el jugador pierda.
     }
 
     private void Update()
@@ -97,10 +95,10 @@ public class Manager : MonoBehaviour
         {
             v = v + 1;
             VillagersNum.text = "Villagers: " + v;
-
         }
     }
 
+    // Se creó un String que retorna el mensaje, que luego es asignado en el Start.
     public string GameOver()
     {
         message = "Game Over";

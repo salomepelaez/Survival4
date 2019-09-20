@@ -6,16 +6,17 @@ using NPC.Ally;
 
 public class NPCConduct : MonoBehaviour
 {
-    public float npcSpeed = 2f;
-    Vector3 direction;
-    float attackRange;
-    public Transform target;
+    public float npcSpeed = 2f; // Se asignó una velocidad para los NPCs.
+    Vector3 direction; // Se creó un Vector3 para la dirección.
+    float attackRange; // Se creó un flotante para el rango de ataque.
+    public Transform target; // Se creó un Transform público, que luego es asignado respectivamente en la clase Hero, Villager y Zombie.
 
+    // Este void se encarga del movimiento.
     public void NPCMove()
     {
-        if (Manager.inGame == true)
+        if (Manager.inGame == true) // Solamente cuando el juego está activo el movimiento se genera.
         {
-            attackRange = Vector3.Distance(target.position, transform.position);
+            attackRange = Vector3.Distance(target.position, transform.position); // El rango de ataque se basa en la distancia con el Target.
             float rotationSpeed = 25f; // Se creó una variable mucho mayor que la velocidad general del zombie, para que su rotación pueda ser visible.
             
             if (move == "Moving")
@@ -34,10 +35,9 @@ public class NPCConduct : MonoBehaviour
             {
                 transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
             }
-
             
-            if (attackRange < 5.0f)
-            {   
+            if (attackRange < 5.0f) 
+            {
                 direction = Vector3.Normalize(target.transform.position - transform.position);
                 transform.position += direction * npcSpeed * Time.deltaTime;
             }
@@ -47,8 +47,8 @@ public class NPCConduct : MonoBehaviour
     public static Move m;
     string move;
 
-    // Esta es la función de movimiento antes mencionada.
-    void NPCAssignment() // Se encarga de asignar variables aleatorias, creando las posibilidades de dirección.
+    // Esta es la función que asigna los estados.
+    void NPCAssignment()
     {
         switch (Random.Range(0, 6))
         {

@@ -19,7 +19,7 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
 
             void Start()
             {
-                target = FindObjectOfType<Zombie>().GetComponent<Transform>();
+                target = FindObjectOfType<Zombie>().GetComponent<Transform>(); // Para el Ciudadano el objetivo es el Zombie.
 
                 transform.tag = "Villager"; // El cambiar el nombre de la etiqueta, permite encontrar de manera sencilla el objeto con el que se colisiona.
                 transform.name = "Villager"; // Se cambió el nombre del objeto para poder identificarlo fácilmente.
@@ -32,15 +32,16 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
                 villagersData.age = Random.Range(15, 101);
                 villagersData.peopleNames = (Names)Random.Range(0, 20);
 
-                InvokeRepeating("NPCAssignment", 3.0f, 3.0f);
-                
-                npcSpeed = (15f * npcSpeed) / villagersData.age;
-                              
+                InvokeRepeating("NPCAssignment", 3.0f, 3.0f); // Se llama la repetición para el comportamiento.
+
+                npcSpeed = (15f * npcSpeed) / villagersData.age; // Esta regla de tres inversa se encarga de asignar una velocidad, dependiendo de la edad.                              
             }
 
             private void Update()
             {
                 NPCMove();
+
+                // El siguiente bloque de código lee la posición de los zombies, cuando la distancia es menor al rango, los ciudadanos pasan a huir.
                 Zombie closest = null;
                 float closestDistance = 5.0f;
 
@@ -59,12 +60,13 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
                 }
             }
 
+            // A continuación se asigna el mensaje de los aldeanos.
             public string PrintNames()
             {
                 return "Hola soy " + villagersData.peopleNames + ". Y tengo " + villagersData.age + " años.";
             }
 
-
+            // Cuando el ciudadano es alcanzado por un Zombie, estos pasan a realizar el cast.
             public void OnCollisionEnter(Collision collision)
             {
                 if (collision.transform.tag == "Zombie")
@@ -104,6 +106,7 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
             public int age;
             public Names peopleNames;
 
+            // En este pequeño bloque se realiza el cast de estructuras.
             public static explicit operator ZombieData(VillagersData vD)
             {
                 ZombieData zD = new ZombieData();
