@@ -49,6 +49,7 @@ namespace NPC // Este Namespace abriga los otros dos correspondientes: Ally and 
 
                     if (distance < closestDistance)
                     {
+                        m = Move.Pursuing;
                         closest = v;
                         closestDistance = distance;
                         direction = Vector3.Normalize(v.transform.position - transform.position);

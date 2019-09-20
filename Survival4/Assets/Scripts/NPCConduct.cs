@@ -44,7 +44,7 @@ public class NPCConduct : MonoBehaviour
         }
     }
 
-    public Move m;
+    public static Move m;
     string move;
 
     // Esta es la función de movimiento antes mencionada.
@@ -73,7 +73,9 @@ public class NPCConduct : MonoBehaviour
     {
         Idle,
         Moving,
-        Rotating
+        Rotating,
+        Pursuing,
+        Running
     }
 
     public struct NPCData
